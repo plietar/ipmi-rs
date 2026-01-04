@@ -202,16 +202,7 @@ impl SubState {
                 let data_len = data_and_trailer.len() - trailer_len - 1;
 
                 let (data, trailer) = data_and_trailer.split_at_mut(data_len);
-
                 let trailer = &trailer[..trailer.len() - 1];
-                let trailer_len_desc = trailer[trailer.len() - 1] as usize;
-
-                if trailer.len() != trailer_len
-                    || trailer.len() != trailer_len_desc
-                    || trailer_len != trailer_len_desc
-                {
-                    return Err(CryptoUnwrapError::IncorrectConfidentialityTrailerLen);
-                }
 
                 (data, trailer)
             }
